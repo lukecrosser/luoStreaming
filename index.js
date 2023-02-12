@@ -25,6 +25,7 @@ app.get("/video", function(req,res){
             "Accept-Ranges": "bytes",
             "Content-Length" :contentLength,
             "Content-Type" : "video/mp4",
+            "Cache-Control": "public, max-age=1800",
     };
     res.writeHead(206,headers);
     
@@ -33,6 +34,7 @@ app.get("/video", function(req,res){
     videoStream.pipe(res);
 });
 
-app.listen(8000, function() {
-    console.log("Listening on port 8000!");
+const port = process.env.port || 3000;
+app.listen(port, function() {
+    console.log("Live on port 8000");
 });
